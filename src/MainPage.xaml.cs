@@ -30,6 +30,24 @@ namespace HTML5App1
             // Add your URL here
             Browser.Navigate(new Uri(MainUri, UriKind.Relative));
 
+            // setup the image to display
+            var img = "";
+            switch (ResolutionHelper.CurrentResolution)
+            {
+                case Resolutions.HD720p:
+                    img = "/Html/images/bg-720p.png";
+                    break;
+                case Resolutions.WXGA:
+                    img = "/Html/images/bg-wxga.png";
+                    break;
+                case Resolutions.WVGA:
+                    img = "/Html/images/bg-wvga.png";
+                    break;
+                default:
+                    throw new InvalidOperationException("Unknown resolution type");
+            }
+            Browser.InvokeScript("setImage", new string[] { img });
+
         }
 
 
@@ -41,6 +59,46 @@ namespace HTML5App1
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
+        }
+    }
+
+    public enum Resolutions { WVGA, WXGA, HD720p };
+
+    public static class ResolutionHelper
+    {
+        private static bool IsWvga
+        {
+            get
+            {
+                return App.Current.Host.Content.ScaleFactor == 100;
+            }
+        }
+
+        private static bool IsWxga
+        {
+            get
+            {
+                return App.Current.Host.Content.ScaleFactor == 160;
+            }
+        }
+
+        private static bool Is720p
+        {
+            get
+            {
+                return App.Current.Host.Content.ScaleFactor == 150;
+            }
+        }
+
+        public static Resolutions CurrentResolution
+        {
+            get
+            {
+                if (IsWvga) return Resolutions.WVGA;
+                else if (IsWxga) return Resolutions.WXGA;
+                else if (Is720p) return Resolutions.HD720p;
+                else throw new InvalidOperationException("Unknown resolution");
+            }
         }
     }
 }
