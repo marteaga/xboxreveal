@@ -30,24 +30,26 @@ namespace HTML5App1
             // Add your URL here
             Browser.Navigate(new Uri(MainUri, UriKind.Relative));
 
-            // setup the image to display
-            var img = "";
-            switch (ResolutionHelper.CurrentResolution)
+            Browser.LoadCompleted += (s, args) =>
             {
-                case Resolutions.HD720p:
-                    img = "/Html/images/bg-720p.png";
-                    break;
-                case Resolutions.WXGA:
-                    img = "/Html/images/bg-wxga.png";
-                    break;
-                case Resolutions.WVGA:
-                    img = "/Html/images/bg-wvga.png";
-                    break;
-                default:
-                    throw new InvalidOperationException("Unknown resolution type");
-            }
-            Browser.InvokeScript("setImage", new string[] { img });
-
+                // setup the image to display
+                var img = "";
+                switch (ResolutionHelper.CurrentResolution)
+                {
+                    case Resolutions.HD720p:
+                        img = "/Html/images/bg-720p.png";
+                        break;
+                    case Resolutions.WXGA:
+                        img = "/Html/images/bg-wxga.png";
+                        break;
+                    case Resolutions.WVGA:
+                        img = "/Html/images/bg-wvga.png";
+                        break;
+                    default:
+                        throw new InvalidOperationException("Unknown resolution type");
+                }
+                Browser.InvokeScript("setImage", new string[] { img });
+            };
         }
 
 

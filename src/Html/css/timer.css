@@ -35,7 +35,7 @@
 /* WVGA Support */
 @media screen and (min-device-width : 480px) and (max-device-width : 480px){
     #table {
-        margin-top:170px;
+        margin-top:175px;
     }
 }
 
