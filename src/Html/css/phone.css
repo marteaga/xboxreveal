@@ -1,19 +1,8 @@
-﻿@media all and (orientation:portrait) {
-    @-ms-viewport {
-        width:320px;
+﻿@-ms-viewport {
+    width:480px;
         user-zoom: fixed;
         max-zoom: 1;
         min-zoom: 1;
-    }
-}
-
-@media all and (orientation:landscape) {
-    @-ms-viewport {
-        width:480px;
-        user-zoom: fixed;
-        max-zoom: 1;
-        min-zoom: 1;
-    }
 }
 
 html, body {

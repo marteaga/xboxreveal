@@ -2,6 +2,10 @@
     countdown(year, month, day, hour, minute);
 }, false);
 
-function setImage(values) {
-    document.getElementById('bg').src = values;
+function setImage(img, height) {
+    var elem = document.getElementById('bg');
+    if (elem) {
+        elem.style.height = height;
+        elem.src = img;
+    }
 }
