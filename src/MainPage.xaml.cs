@@ -66,7 +66,7 @@ namespace HTML5App1
             if (border != null)
             {
                 Point initialPoint = new Point();
-
+                
                 border.ManipulationStarted += (o, args) =>
                 {
                     initialPoint = args.ManipulationOrigin;
@@ -75,10 +75,16 @@ namespace HTML5App1
                 {
                     args.Handled = true;
                 };
-                border.ManipulationCompleted += (o, args) =>
-                {
-                    args.Handled = true;
-                };
+border.ManipulationCompleted += (o, args) =>
+{
+    double y = args.TotalManipulation.Translation.Y;
+    double x = args.TotalManipulation.Translation.X;
+
+    if (Math.Abs(y) < Math.Abs(x))
+        if (x < 0)
+            args.Handled = true;
+                    
+};
             }
         }
 
