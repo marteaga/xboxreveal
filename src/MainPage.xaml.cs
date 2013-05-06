@@ -30,32 +30,56 @@ namespace HTML5App1
             // Add your URL here
             Browser.Navigate(new Uri(MainUri, UriKind.Relative));
 
-Browser.LoadCompleted += (s, args) =>
-{
-    // setup the image to display
-    var img = "";
-    var height = "800px";
-    switch (ResolutionHelper.CurrentResolution)
-    {
-        case Resolutions.HD720p:
-            img = "images/bg-720p.png";
-                        
-            break;
-        case Resolutions.WXGA:
-            img = "images/bg-wxga.png";
-            height = "800px";
-            break;
-        case Resolutions.WVGA:
-            height = "800px";
-            img = "images/bg-wvga.png";
-            break;
-        default:
-            throw new InvalidOperationException("Unknown resolution type");
-    }
-    Browser.InvokeScript("setImage", new string[] { img, height });
-};
+            Browser.LoadCompleted += (s, args) =>
+            {
+                // setup the image to display
+                var img = "";
+                var height = "800px";
+                switch (ResolutionHelper.CurrentResolution)
+                {
+                    case Resolutions.HD720p:
+                        img = "images/bg-720p.png";
 
-          
+                        break;
+                    case Resolutions.WXGA:
+                        img = "images/bg-wxga.png";
+                        height = "800px";
+                        break;
+                    case Resolutions.WVGA:
+                        height = "800px";
+                        img = "images/bg-wvga.png";
+                        break;
+                    default:
+                        throw new InvalidOperationException("Unknown resolution type");
+                }
+                Browser.InvokeScript("setImage", new string[] { img, height });
+            };
+
+            // disable scrolling
+            var border0 = VisualTreeHelper.GetChild(Browser, 0);
+            var border1 = VisualTreeHelper.GetChild(border0, 0);
+            var panZoom = VisualTreeHelper.GetChild(border1, 0);
+            var grid = VisualTreeHelper.GetChild(panZoom, 0);
+            var grid2 = VisualTreeHelper.GetChild(grid, 0);
+            var border = VisualTreeHelper.GetChild(grid2, 0) as Border;
+
+            if (border != null)
+            {
+                Point initialPoint = new Point();
+
+                border.ManipulationStarted += (o, args) =>
+                {
+                    initialPoint = args.ManipulationOrigin;
+                };
+                border.ManipulationDelta += (o, args) =>
+                {
+                    args.Handled = true;
+                };
+                border.ManipulationCompleted += (o, args) =>
+                {
+                    args.Handled = true;
+                };
+            }
         }
 
 
