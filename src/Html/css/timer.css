@@ -35,20 +35,42 @@
 /* WVGA Support */
 @media screen and (min-device-width : 480px) and (max-device-width : 480px){
     #table {
-        margin-top:175px;
+        margin-top:300px;
+           width: 550px
     }
+    .numbers {
+        font-size: 52px;
+    }
+    .title {
+        font-size: 20px;
+    }
+
 }
 
 /* WXGA Support */
 @media screen and (min-device-width : 768px) and (max-device-width : 768px){
     #table {
-        margin-top:180px;
+        margin-top:300px;
+          width: 550px
+    }
+    .numbers {
+        font-size: 52px;
+    }
+    .title {
+        font-size: 20px;
     }
 }
 
 /* 720p Support */
 @media screen and (min-device-width : 720px) and (max-device-width : 720px){
     #table {
-        margin-top:200px;
+        margin-top:320px;
+        width: 550px
+    }
+    .numbers {
+        font-size: 52px;
+    }
+    .title {
+        font-size: 20px;
     }
 }
